@@ -19,4 +19,10 @@ public interface ScheduleMapper {
 
     @Delete("delete from schedule where id = #{id}")
     Integer deleteById(@Param("id") Integer id);
+
+    @Select("select * from schedule where event like #{event} limit #{pageNum}, #{pageSize}")
+    List<Schedule> selectPage(@Param("event") String event, @Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize);
+
+    @Select("select count(*) from schedule where event like #{event}")
+    Integer selectTotal(String event);
 }
