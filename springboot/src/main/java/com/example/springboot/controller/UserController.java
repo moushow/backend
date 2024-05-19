@@ -1,6 +1,7 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.entity.User;
+import com.example.springboot.mapper.ScheduleMapper;
 import com.example.springboot.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,4 +21,5 @@ public class UserController {
     public List<User> findUser(){
         return userMapper.findAll();
     }
+
 }
