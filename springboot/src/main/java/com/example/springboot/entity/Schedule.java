@@ -11,7 +11,5 @@ public class Schedule {
     private String state;
     private String remark;
     private String event;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 }
