@@ -6,6 +6,7 @@ import com.example.springboot.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,12 @@ public class ScheduleController {
     @DeleteMapping("/{id}")
     public Integer delete(@PathVariable Integer id){
         return scheduleMapper.deleteById(id);
+    }
+
+    //批量删除数据
+    @PostMapping ("/del/batch")
+    public Integer deleteBatch(@RequestBody ArrayList<String> ids){
+        return scheduleService.deleteByIds(ids);
     }
 
     //分页查询

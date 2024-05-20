@@ -5,6 +5,8 @@ import com.example.springboot.mapper.ScheduleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class ScheduleService {
 
@@ -17,5 +19,16 @@ public class ScheduleService {
         }else{
             return scheduleMapper.update(schedule);
         }
+    }
+
+    public Integer deleteByIds(ArrayList<String> ids) {
+        for(String id : ids){
+            if(scheduleMapper.deleteById(Integer.valueOf(id)) == 1){
+                continue;
+            }else{
+                return 0;
+            }
+        }
+        return 1;
     }
 }
