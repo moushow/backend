@@ -27,10 +27,16 @@ public class ScheduleController {
         return scheduleService.save(schedule);
     }
 
-    //查询所有数据
+    //查询所有日程
     @GetMapping
     public List<Schedule> findAll(){
         return scheduleMapper.findAll();
+    }
+
+    //按照username查询日程
+    @GetMapping("/{username}")
+    public List<Schedule> findScheduleByUserName(@PathVariable String username){
+        return scheduleMapper.findScheduleByUserName(username);
     }
 
     //按照id删除数据

@@ -26,4 +26,6 @@ public interface ScheduleMapper {
     @Select("select count(*) from schedule where event like #{event} and state like #{state} and remark like #{remark} and username = #{username}")
     Integer selectTotal(@Param("event") String event, @Param("state") String state, @Param("remark") String remark, @Param("username") String username);
 
+    @Select("select * from schedule where username = #{username}")
+    List<Schedule> findScheduleByUserName(@Param("username") String username);
 }
