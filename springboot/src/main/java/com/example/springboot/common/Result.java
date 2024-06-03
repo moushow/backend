@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 接口统一返回包装类，旨在后端全部返回Result，目前只有login方法使用
+ * 接口统一返回包装类，旨在后端全部返回Result，目前只有login和Echarts使用
  */
 @Data
 @NoArgsConstructor
