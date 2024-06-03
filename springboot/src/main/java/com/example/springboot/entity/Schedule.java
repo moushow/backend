@@ -1,6 +1,5 @@
 package com.example.springboot.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,4 +11,5 @@ public class Schedule {
     private String remark;
     private String event;
     private Date date;
+    private String username;
 }

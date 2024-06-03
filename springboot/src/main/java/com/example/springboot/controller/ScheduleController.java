@@ -49,6 +49,7 @@ public class ScheduleController {
     @GetMapping("/page")       //接口路径为/schedule/page
     public Map<String, Object> findPage(@RequestParam Integer pageNum,
                                         @RequestParam Integer pageSize,
+                                        @RequestParam String username,
                                         @RequestParam String event,
                                         @RequestParam String state,
                                         @RequestParam String remark){
@@ -56,8 +57,8 @@ public class ScheduleController {
         event = "%" + event + "%";
         state = "%" + state + "%";
         remark = "%" + remark + "%";
-        List<Schedule> data = scheduleMapper.selectPage(event, state, remark, pageNum, pageSize);
-        Integer total = scheduleMapper.selectTotal(event, state, remark);
+        List<Schedule> data = scheduleMapper.selectPage(event, state, remark, pageNum, pageSize, username);
+        Integer total = scheduleMapper.selectTotal(event, state, remark, username);
         Map<String, Object> res = new HashMap<>();
         res.put("data", data);
         res.put("total", total);

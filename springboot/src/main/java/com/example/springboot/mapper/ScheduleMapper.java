@@ -20,10 +20,10 @@ public interface ScheduleMapper {
     @Delete("delete from schedule where id = #{id}")
     Integer deleteById(@Param("id") Integer id);
 
-    @Select("select * from schedule where event like #{event} and state like #{state} and remark like #{remark} limit #{pageNum}, #{pageSize}")
-    List<Schedule> selectPage(@Param("event") String event, @Param("state") String state, @Param("remark") String remark, @Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize);
+    @Select("select * from schedule where event like #{event} and state like #{state} and remark like #{remark} and username = #{username} limit #{pageNum}, #{pageSize}")
+    List<Schedule> selectPage(@Param("event") String event, @Param("state") String state, @Param("remark") String remark, @Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize, @Param("username") String username);
 
-    @Select("select count(*) from schedule where event like #{event} and state like #{state} and remark like #{remark}")
-    Integer selectTotal(@Param("event") String event, @Param("state") String state, @Param("remark") String remark);
+    @Select("select count(*) from schedule where event like #{event} and state like #{state} and remark like #{remark} and username = #{username}")
+    Integer selectTotal(@Param("event") String event, @Param("state") String state, @Param("remark") String remark, @Param("username") String username);
 
 }
