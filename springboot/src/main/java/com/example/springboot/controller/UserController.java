@@ -1,8 +1,9 @@
 package com.example.springboot.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.example.springboot.common.Constants;
+import com.example.springboot.common.Result;
 import com.example.springboot.controller.dto.UserDTO;
-import com.example.springboot.entity.Schedule;
 import com.example.springboot.entity.User;
 import com.example.springboot.mapper.UserMapper;
 import com.example.springboot.service.UserService;
@@ -40,11 +41,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public boolean login(@RequestBody UserDTO userDTO){
+    public Result login(@RequestBody UserDTO userDTO){
         String username = userDTO.getUsername();
         String password = userDTO.getPassword();
         if(StrUtil.isBlank(username) || StrUtil.isBlank(password)){
-            return false;
+            return Result.error(Constants.CODE_400, "参数错误");
         }
         return userService.login(userDTO);
     }
