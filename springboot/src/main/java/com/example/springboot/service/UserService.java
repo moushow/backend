@@ -22,7 +22,11 @@ public class UserService {
         if (user == null || !user.getPassword().equals(password)) {
             return Result.error(Constants.CODE_401, "用户名或密码错误");
         }
-        userDTO.setNickname(user.getNickname());
+        if(user.getNickname() != null){
+            userDTO.setNickname(user.getNickname());
+        }else{
+            userDTO.setNickname(user.getUsername());
+        }
         return Result.success(userDTO);
     }
 }
