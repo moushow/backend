@@ -10,8 +10,8 @@ public interface ScheduleMapper {
     @Select("select * from schedule")
     List<Schedule> findAll();
 
-    @Insert("insert into schedule(date, state, event, remark) values (#{date}," +
-            " #{state}, #{event}, #{remark})")
+    @Insert("insert into schedule(date, state, event, remark, username) values (#{date}," +
+            " #{state}, #{event}, #{remark}, #{username})")
     int insert(Schedule schedule);
 
     //这里需要动态更新，见/resources/mapper/Schedule.xml

@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.example.springboot.common.Constants;
 import com.example.springboot.common.Result;
 import com.example.springboot.controller.dto.UserDTO;
+import com.example.springboot.entity.Schedule;
 import com.example.springboot.entity.User;
 import com.example.springboot.mapper.UserMapper;
 import com.example.springboot.service.UserService;
@@ -30,14 +31,29 @@ public class UserController {
 
     //按用户名查询
     @GetMapping("/{username}")
-    public User findByUserName(@PathVariable String username){
-        return userMapper.findByUserName(username);
+    public Result findByUserName(@PathVariable String username){
+        User user =  userMapper.findByUserName(username);
+        if(user != null){
+            return Result.success(user);
+        }else{
+            return Result.error(Constants.CODE_401, "用户信息不存在");
+        }
     }
 
     //新增用户
     @PostMapping
     public Integer addUser(@RequestBody UserDTO userDTO){
         return userMapper.insert(userDTO);
+    }
+
+    @PostMapping("/update")
+    public Integer updateUser(@RequestBody User user){
+        String username = user.getUsername();
+        String password = user.getPassword();
+        String nickname = user.getNickname();
+        String telephone = user.getTelephone();
+        String email = user.getEmail();
+        return userMapper.update(password, nickname, telephone, email, username);
     }
 
     @PostMapping("/login")

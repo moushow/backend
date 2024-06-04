@@ -2,10 +2,7 @@ package com.example.springboot.mapper;
 
 import com.example.springboot.controller.dto.UserDTO;
 import com.example.springboot.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -20,4 +17,6 @@ public interface UserMapper {
     @Insert("insert into user(username, password) values (#{username}, #{password})")
     int insert(UserDTO userDTO);
 
+    @Update("update user set password = #{password}, nickname = #{nickname}, telephone = #{telephone}, email = #{email} where username = #{username}")
+    Integer update(@Param("password") String password, @Param("nickname") String nickname, @Param("telephone") String telephone, @Param("email") String email, @Param("username") String username);
 }

@@ -17,6 +17,9 @@
             <if test="remark != null">
                 remark = #{remark}
             </if>
+            <if test="username != null">
+                username = #{username}
+            </if>
         </set>
         <where>
             id = #{id}
