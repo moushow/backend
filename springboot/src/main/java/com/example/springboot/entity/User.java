@@ -10,4 +10,5 @@ public class User {
     private String nickname;
     private String telephone;
     private String email;
+    private String avatar;
 }

@@ -3,6 +3,7 @@ package com.example.springboot.service;
 import com.example.springboot.common.Constants;
 import com.example.springboot.common.Result;
 import com.example.springboot.controller.dto.UserDTO;
+import com.example.springboot.entity.Schedule;
 import com.example.springboot.entity.User;
 import com.example.springboot.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
