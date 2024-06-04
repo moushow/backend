@@ -12,4 +12,5 @@ public class Schedule {
     private String event;
     private Date date;
     private String username;
+
 }
