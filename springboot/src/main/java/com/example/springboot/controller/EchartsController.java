@@ -52,8 +52,7 @@ public class EchartsController {
         List<Map<String, Object>> mapList = new ArrayList<>();
         return Result.success();
     }
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
+
+
+

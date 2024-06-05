@@ -1,6 +1,7 @@
 package com.example.springboot.mapper;
 
 import com.example.springboot.controller.dto.UserDTO;
+import com.example.springboot.controller.dto.UserPasswordDTO;
 import com.example.springboot.entity.User;
 import org.apache.ibatis.annotations.*;
 
@@ -19,4 +20,7 @@ public interface UserMapper {
 
     @Update("update user set password = #{password}, nickname = #{nickname}, telephone = #{telephone}, email = #{email} where username = #{username}")
     Integer update(@Param("password") String password, @Param("nickname") String nickname, @Param("telephone") String telephone, @Param("email") String email, @Param("username") String username);
+
+    @Update("update user set password = #{newPassword} where username = #{username} and password = #{password}")
+    Integer updatePassword(UserPasswordDTO userPasswordDTO);
 }
