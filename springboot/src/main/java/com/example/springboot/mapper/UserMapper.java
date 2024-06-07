@@ -18,8 +18,8 @@ public interface UserMapper {
     @Insert("insert into user(username, password) values (#{username}, #{password})")
     int insert(UserDTO userDTO);
 
-    @Update("update user set password = #{password}, nickname = #{nickname}, telephone = #{telephone}, email = #{email} where username = #{username}")
-    Integer update(@Param("password") String password, @Param("nickname") String nickname, @Param("telephone") String telephone, @Param("email") String email, @Param("username") String username);
+    @Update("update user set password = #{password}, nickname = #{nickname}, telephone = #{telephone}, email = #{email}, avatar = #{avatar} where username = #{username}")
+    Integer update(@Param("password") String password, @Param("nickname") String nickname, @Param("telephone") String telephone, @Param("email") String email, @Param("avatar") String avatar, @Param("username") String username);
 
     @Update("update user set password = #{newPassword} where username = #{username} and password = #{password}")
     Integer updatePassword(UserPasswordDTO userPasswordDTO);
