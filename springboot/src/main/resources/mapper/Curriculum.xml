@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.CurriculumMapper">
+    <update id="update">
+        update curriculum
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="no != null">
+                no = #{no},
+            </if>
+            <if test="teacher != null">
+                teacher = #{teacher},
+            </if>
+            <if test="week_day != null">
+                week_day = #{week_day},
+            </if>
+            <if test="section != null">
+                section = #{section},
+            </if>
+            <if test="room != null">
+                room = #{room},
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+</mapper>
