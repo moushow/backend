@@ -1,5 +1,9 @@
 package com.example.springboot.controller;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.example.springboot.common.Result;
 import com.example.springboot.entity.Curriculum;
 import com.example.springboot.mapper.CurriculumMapper;
 import com.example.springboot.service.CurriculumService;
@@ -37,6 +41,69 @@ public class CurriculumController {
     @GetMapping("/{username}")
     public List<Curriculum> findCurriculumByUserName(@PathVariable String username){
         return curriculumMapper.findCurriculumByUserName(username);
+    }
+
+    private JSONObject setJson(String week_day, Curriculum curriculum, JSONObject jsonObject){
+        if("1".equals(week_day)){
+            jsonObject.set("mon", curriculum);
+        }else if("2".equals(week_day)){
+            jsonObject.set("tue", curriculum);
+        }else if("3".equals(week_day)){
+            jsonObject.set("wes", curriculum);
+        }else if("4".equals(week_day)){
+            jsonObject.set("thu", curriculum);
+        }else if("5".equals(week_day)) {
+            jsonObject.set("fri", curriculum);
+        }else if("6".equals(week_day)){
+            jsonObject.set("sat", curriculum);
+        }else if("7".equals(week_day)){
+            jsonObject.set("sun", curriculum);
+        }
+        return jsonObject;
+    }
+
+    //查询课表
+    @GetMapping("/courseTable/{username}")
+    public Result findCourseTable(@PathVariable String username){
+        List<Curriculum> Curriculums = findCurriculumByUserName(username);
+        List<JSONObject> list = CollUtil.newArrayList();
+        JSONObject jsonObject1 = new JSONObject();
+        JSONObject jsonObject2 = new JSONObject();
+        JSONObject jsonObject3 = new JSONObject();
+        JSONObject jsonObject4 = new JSONObject();
+        JSONObject jsonObject5 = new JSONObject();
+        jsonObject1.set("section", JSONUtil.parseObj("{\"num\": \"第一大节\", \"time\": \"08:00-09:35\"}"));
+        jsonObject2.set("section", JSONUtil.parseObj("{\"num\": \"第二大节\", \"time\": \"10:00-12:25\"}"));
+        jsonObject3.set("section", JSONUtil.parseObj("{\"num\": \"第三大节\", \"time\": \"13:25-15:50\"}"));
+        jsonObject4.set("section", JSONUtil.parseObj("{\"num\": \"第四大节\", \"time\": \"16:15-17:50\"}"));
+        jsonObject5.set("section", JSONUtil.parseObj("{\"num\": \"第五大节\", \"time\": \"18:50-21:15\"}"));
+        list.add(jsonObject1);
+        list.add(jsonObject2);
+        list.add(jsonObject3);
+        list.add(jsonObject4);
+        list.add(jsonObject5);
+        Curriculums.forEach(curriculum -> {
+            String week_day = curriculum.getWeek_day();
+            String section = curriculum.getSection();
+            switch(section){
+                case "1":
+                    setJson(week_day, curriculum, jsonObject1);
+                    break;
+                case "2":
+                    setJson(week_day, curriculum, jsonObject2);
+                    break;
+                case "3":
+                    setJson(week_day, curriculum, jsonObject3);
+                    break;
+                case "4":
+                    setJson(week_day, curriculum, jsonObject4);
+                    break;
+                case "5":
+                    setJson(week_day, curriculum, jsonObject5);
+                    break;
+            }
+        });
+        return Result.success(list);
     }
 
     //按照id删除数据

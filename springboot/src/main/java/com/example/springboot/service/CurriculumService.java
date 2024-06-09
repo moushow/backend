@@ -23,9 +23,7 @@ public class CurriculumService {
 
     public Integer deleteByIds(ArrayList<String> ids) {
         for(String id : ids){
-            if(curriculumMapper.deleteById(Integer.valueOf(id)) == 1){
-                continue;
-            }else{
+            if(curriculumMapper.deleteById(Integer.valueOf(id)) != 1){
                 return 0;
             }
         }
