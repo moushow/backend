@@ -43,7 +43,7 @@ public class CurriculumController {
         return curriculumMapper.findCurriculumByUserName(username);
     }
 
-    private JSONObject setJson(String week_day, Curriculum curriculum, JSONObject jsonObject){
+    private void setJson(String week_day, Curriculum curriculum, JSONObject jsonObject){
         if("1".equals(week_day)){
             jsonObject.set("mon", curriculum);
         }else if("2".equals(week_day)){
@@ -59,7 +59,6 @@ public class CurriculumController {
         }else if("7".equals(week_day)){
             jsonObject.set("sun", curriculum);
         }
-        return jsonObject;
     }
 
     //查询课表
@@ -77,11 +76,6 @@ public class CurriculumController {
         jsonObject3.set("section", JSONUtil.parseObj("{\"num\": \"第三大节\", \"time\": \"13:25-15:50\"}"));
         jsonObject4.set("section", JSONUtil.parseObj("{\"num\": \"第四大节\", \"time\": \"16:15-17:50\"}"));
         jsonObject5.set("section", JSONUtil.parseObj("{\"num\": \"第五大节\", \"time\": \"18:50-21:15\"}"));
-        list.add(jsonObject1);
-        list.add(jsonObject2);
-        list.add(jsonObject3);
-        list.add(jsonObject4);
-        list.add(jsonObject5);
         Curriculums.forEach(curriculum -> {
             String week_day = curriculum.getWeek_day();
             String section = curriculum.getSection();
@@ -103,6 +97,11 @@ public class CurriculumController {
                     break;
             }
         });
+        list.add(jsonObject1);
+        list.add(jsonObject2);
+        list.add(jsonObject3);
+        list.add(jsonObject4);
+        list.add(jsonObject5);
         return Result.success(list);
     }
 
