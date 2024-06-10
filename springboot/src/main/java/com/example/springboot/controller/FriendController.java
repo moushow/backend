@@ -51,11 +51,15 @@ public class FriendController {
     //同意好友申请
     @PostMapping("/agree/{username}/{friendName}")
     public Result agree(@PathVariable String username, @PathVariable String friendName){
-        User user = userMapper.findByUserName(friendName);
-        String nickname = user.getNickname();
-        String telephone = user.getTelephone();
-        String email = user.getEmail();
-        int b = friendMapper.agree(username, friendName, nickname, telephone, email) & friendMapper.insert(username, friendName, nickname, telephone, email);
+        User user1 = userMapper.findByUserName(friendName);
+        String nickname1 = user1.getNickname();
+        String telephone1 = user1.getTelephone();
+        String email1 = user1.getEmail();
+        User user2 = userMapper.findByUserName(username);
+        String nickname2 = user2.getNickname();
+        String telephone2 = user2.getTelephone();
+        String email2 = user2.getEmail();
+        int b = friendMapper.agree(username, friendName, nickname2, telephone2, email2) & friendMapper.insert(username, friendName, nickname1, telephone1, email1);
         if(b == 1){
             return Result.success();
         }else{
