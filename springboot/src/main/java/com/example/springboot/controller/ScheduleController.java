@@ -6,10 +6,9 @@ import com.example.springboot.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/schedule")
@@ -34,9 +33,33 @@ public class ScheduleController {
     }
 
     //按照username查询日程
+//    @GetMapping("/{username}")
+//    public List<Schedule> findScheduleByUserName(@PathVariable String username){
+//        return scheduleMapper.findScheduleByUserName(username);
+//    }
+    //按照username查询日程并升序
     @GetMapping("/{username}")
     public List<Schedule> findScheduleByUserName(@PathVariable String username){
-        return scheduleMapper.findScheduleByUserName(username);
+        return scheduleMapper.findScheduleByUserName(username).stream()
+                .sorted(Comparator.comparing(Schedule::getDate))
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/events/{username}")
+    public List<Map<String, String>> findEventsByUserName(@PathVariable String username) {
+        // 获取今天的日期
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String today = sdf.format(new Date());
+
+        return scheduleMapper.findScheduleByUserName(username).stream()
+                .filter(schedule -> today.equals(sdf.format(schedule.getDate())))
+                .sorted(Comparator.comparing(Schedule::getDate))
+                .map(schedule -> {
+                    Map<String, String> eventMap = new HashMap<>();
+                    eventMap.put("event", schedule.getEvent());
+                    return eventMap;
+                })
+                .collect(Collectors.toList());
     }
 
     //按照id删除数据

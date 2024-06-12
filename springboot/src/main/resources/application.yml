@@ -16,5 +16,5 @@ mybatis:
 
 files:
   upload:
-    path: D:/IDEAProject/files/
+    path: E:/软工2.0版本/backend/file
 
